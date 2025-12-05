@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const User = require('../models/User');
-const auth = require('../middleware/auth');
+const auth = require('./middleware/auth');
 
 // Protect all routes
 router.use(auth);

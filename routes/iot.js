@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const Device = require('../models/Device');
 const User = require('../models/User');
-const auth = require('../middleware/auth');
+const auth = require('./middleware/auth');
 
 // Register new device
 router.post('/register', auth, async (req, res) => {

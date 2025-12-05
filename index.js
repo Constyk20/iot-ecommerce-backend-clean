@@ -21,8 +21,17 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Handle preflight requests
-app.options('*', cors(corsOptions));
+// Handle preflight requests - FIX: Use regex instead of '*'
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, x-auth-token, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    return res.status(200).json({});
+  }
+  next();
+});
 
 // ========================================
 // Request Logging Middleware (Debug)
